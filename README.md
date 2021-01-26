@@ -32,7 +32,7 @@
 |shpping_charge_id|integer|null: false|active_hash|
 |delivery_date_id|integer|null: false|active_hash|
 |prefecture_id|integer|null: false|active_hash|
-|`user`|references|null: false, foreign_key: true||
+|user|references|null: false, foreign_key: true||
 <br>
 
 - ### Association  
@@ -45,8 +45,8 @@
 - ### Columns  
 |Column|Type|Options|
 |------|----|-------|
-|`user`|references|null: false, foreign_key: true|
-|`item`|references|null: false, foreign_key: true|  
+|user|references|null: false, foreign_key: true|
+|item|references|null: false, foreign_key: true|  
 <br>
 
 - ### Association  
@@ -66,7 +66,7 @@
 |address_line_2|string|||
 |phone_number|string|null: false|Regular expression|
 |prefecture_id|integer|null: false|active_hash|
-|`order`|references|null: false, foreign_key: true||
+|order|references|null: false, foreign_key: true||
 <br>
 
 - ### Association  
