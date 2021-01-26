@@ -8,9 +8,9 @@
 |first_name_kana|string|null: false|devise|
 |last_name|string|null: false|devise|
 |last_name_kana|string|null: false|devise|
-|nickname|string|null: false|devise|
+|nickname|string|null: false, unique: true|devise|
 |birth_date|date|null: false|devise|
-|email|string|null: false|devise|
+|email|string|null: false, unique: true|devise|
 |encrypted_password|string|null: false|devise, Regular expression|  
 <br>
 
@@ -26,8 +26,13 @@
 |------|----|-------|-------|
 |name|string|null: false||
 |explanation|text|null: false||
-|price|integer|null: false||
-|`user_id`|references|null: false, foreign_key: true||
+|price|integer|integer||
+|category|integer|null: false|active_hash|
+|condition|integer|null: false|active_hash|
+|shpping_charge|integer|null: false|active_hash|
+|delivery_date|integer|null: false|active_hash|
+|prefecture|integer|null: false|active_hash|
+|`user`|references|null: false, foreign_key: true||
 |( image )|||active_storage|
 <br>
 
@@ -41,13 +46,13 @@
 - ### Columns  
 |Column|Type|Options|
 |------|----|-------|
-|`user_id`|references|null: false, foreign_key: true|
-|`item_id`|references|null: false, foreign_key: true|  
+|`user`|references|null: false, foreign_key: true|
+|`item`|references|null: false, foreign_key: true|  
 <br>
 
 - ### Association  
   - belongs_to :user
-  - has_one :item  
+  - belongs_to :item  
   - has_one :address
 <br>
 <br>
@@ -56,13 +61,13 @@
 - ### Columns  
 |Column|Type|Options|Remarks|
 |------|------|-------|-------|
-|postcode|integer|null: false|Regular expression|
+|postcode|string|null: false|Regular expression|
 |city|string|null: false||
 |address_line_1|string|null: false||
-|address_line_2|string|null: false||
-|phone_number|integer|null: false|Regular expression|
-|`prefecture_id`|references|null: false, foreign_key: true||
+|address_line_2|string|||
+|phone_number|string|null: false|Regular expression|
+|prefecture|integer|null: false|active_hash|
 <br>
 
 - ### Association  
-  - has_one :purchase_contract
+  - belongs_to :purchase_contract
