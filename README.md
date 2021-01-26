@@ -65,6 +65,7 @@
 |address_line_1|string|null: false||
 |address_line_2|string|||
 |phone_number|string|null: false|Regular expression|
+|prefecture_id|integer|null: false|active_hash|
 <br>
 
 - ### Association  
