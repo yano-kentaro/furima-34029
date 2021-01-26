@@ -66,7 +66,8 @@
 |address_line_2|string|||
 |phone_number|string|null: false|Regular expression|
 |prefecture_id|integer|null: false|active_hash|
+|order_id|references|null: false, foreign_key: true||
 <br>
 
 - ### Association  
-  - belongs_to :purchase_contract
+  - belongs_to :order
