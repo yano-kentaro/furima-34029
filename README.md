@@ -29,7 +29,7 @@
 |price|integer|integer||
 |category_id|integer|null: false|active_hash|
 |condition_id|integer|null: false|active_hash|
-|shpping_charge_id|integer|null: false|active_hash|
+|shipping_charge_id|integer|null: false|active_hash|
 |delivery_date_id|integer|null: false|active_hash|
 |prefecture_id|integer|null: false|active_hash|
 |user|references|null: false, foreign_key: true||
