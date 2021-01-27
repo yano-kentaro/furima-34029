@@ -1,9 +1,10 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   with_options presence: true do
-    validates :name
-    validates :explanation
-    validates :price
+    validates :image
+    validates :name, length: { maximum: 40 }
+    validates :explanation, length: { maximum: 1000 }
+    validates :price, numericality: { only_integer: true, greater_than: 300, less_than_or_equal_to: 9999999 }
     with_options numericality: { other_than: 1 } do
       validates :category_id
       validates :condition_id
