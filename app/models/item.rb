@@ -12,11 +12,11 @@ class Item < ApplicationRecord
       validates :prefecture_id
     end
   end
-
   belongs_to :category
   belongs_to :condition
   belongs_to :shipping_charge
   belongs_to :delivery_date
   belongs_to :prefecture
   belongs_to :user
+  has_one_attached :image
 end
