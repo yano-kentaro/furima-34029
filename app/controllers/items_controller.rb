@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_params, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :not_contributor_move_to_index, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -34,11 +34,13 @@ class ItemsController < ApplicationController
     end
   end
   
-  # 編集機能をマージするまでコメントアウトしておく
-  # def destroy
-  #   @item.destroy
-  #   redirect_to root_path
-  # end
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
+  end
 
   private
 
@@ -52,8 +54,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index
-    unless user_signed_in? && current_user.id == @item.user.id
+  def not_contributor_move_to_index
+    unless current_user.id == @item.user.id
       redirect_to root_path
     end
   end
