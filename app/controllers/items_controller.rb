@@ -34,11 +34,10 @@ class ItemsController < ApplicationController
     end
   end
   
-  # 編集機能をマージするまでコメントアウトしておく
-  # def destroy
-  #   @item.destroy
-  #   redirect_to root_path
-  # end
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
 
   private
 
