@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :find_item
-  
+
   def index
     @address_order = AddressOrder.new
   end
+
   def create
     @address_order = AddressOrder.new(address_order_params)
     if @address_order.valid?
@@ -20,12 +21,8 @@ class OrdersController < ApplicationController
 
   def find_item
     @item = Item.find(params[:item_id])
-    if current_user == @item.user
-      redirect_to root_path
-    end
-    if @item.order != nil
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user == @item.user
+    redirect_to root_path unless @item.order.nil?
   end
 
   def address_order_params
