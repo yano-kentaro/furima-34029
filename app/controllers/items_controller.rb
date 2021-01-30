@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_params, only: [:show, :edit, :update, :destroy]
   before_action :not_contributor_move_to_index, only: [:edit, :update, :destroy]
+  before_action :sold_out_item_can_not_edit, only: :edit
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -33,7 +34,7 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     if @item.destroy
       redirect_to root_path
@@ -55,8 +56,10 @@ class ItemsController < ApplicationController
   end
 
   def not_contributor_move_to_index
-    unless current_user.id == @item.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user == @item.user
+  end
+
+  def sold_out_item_can_not_edit
+    redirect_to root_path if current_user == @item.user && !@item.order.nil?
   end
 end
