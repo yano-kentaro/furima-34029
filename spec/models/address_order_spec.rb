@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe AddressOrder, type: :model do
   before do
-    @order = FactoryBot.build(:address_order)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @order = FactoryBot.build(:address_order, user_id: @user.id, item_id: @item.id)
+    sleep 0.1
   end
   describe '商品の購入' do
     context '購入情報が保存される' do
@@ -51,7 +54,7 @@ RSpec.describe AddressOrder, type: :model do
         expect(@order.errors.full_messages).to include("Prefecture can't be blank")
       end
       it '都道府県がid=1だと保存できないこと' do
-        @order.prefecture_id = '1'
+        @order.prefecture_id = 1
         @order.valid?
         expect(@order.errors.full_messages).to include('Prefecture must be other than 1')
       end
@@ -89,6 +92,16 @@ RSpec.describe AddressOrder, type: :model do
         @order.phone_number = '012345678910'
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number is not correct.')
+      end
+      it 'user_idが空だと保存できないこと' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと保存できないこと' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
